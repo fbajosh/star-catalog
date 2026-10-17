@@ -1,0 +1,63 @@
+{
+  "manifestVersion": 1,
+  "source": {
+    "catalog": "HYG",
+    "version": "4.4",
+    "repository": "https://codeberg.org/astronexus/hyg",
+    "commit": "53e3df311869e813ace5f1ad2ec4ce909f13256c",
+    "path": "data/hyg/CURRENT/hyg_v44.csv.gz",
+    "url": "https://codeberg.org/astronexus/hyg/media/commit/53e3df311869e813ace5f1ad2ec4ce909f13256c/data/hyg/CURRENT/hyg_v44.csv.gz",
+    "sha256": "00b349893b9a53106dd488d8371e8d2fa586043e500bb3cdb8bff3931682197d",
+    "bytes": 13636362,
+    "license": "CC-BY-SA-4.0"
+  },
+  "license": {
+    "data": "CC-BY-SA-4.0",
+    "code": "MIT"
+  },
+  "epoch": "J2000",
+  "frame": "equatorial: +x toward RA 0h Dec 0, +y toward RA 6h Dec 0, +z toward the north celestial pole",
+  "record": {
+    "fields": [
+      "x",
+      "y",
+      "z",
+      "mag",
+      "bv"
+    ],
+    "type": "float32",
+    "byteOrder": "little-endian",
+    "stride": 20,
+    "header": null,
+    "missingBv": "NaN"
+  },
+  "order": "magnitude ascending, then HYG id ascending",
+  "cut": "the brightest targetCount stars, then every star as bright as the last: magnitude <= magnitudeLimit",
+  "excluded": [
+    "the Sun (HYG id 0)"
+  ],
+  "eligibleStars": 119613,
+  "files": {
+    "full": {
+      "file": "stars-full.bin",
+      "targetCount": 6000,
+      "count": 6014,
+      "magnitudeLimit": 6.16,
+      "brightestMagnitude": -1.44,
+      "missingBv": 27,
+      "bytes": 120280,
+      "sha256": "3a8408d0de0f5448e69720ff7b20b083ee28eb5f1fd4b0f268477f5b1bbccb0a"
+    },
+    "balanced": {
+      "file": "stars-balanced.bin",
+      "targetCount": 1000,
+      "count": 1002,
+      "magnitudeLimit": 4.58,
+      "brightestMagnitude": -1.44,
+      "missingBv": 4,
+      "bytes": 20040,
+      "sha256": "5958e528578ed1b7c317ea6d28d0686f83221c658bad719d1e28c2d317f8da8d"
+    }
+  },
+  "recipe": "python3 scripts/build_catalog.py --source <hyg csv.gz> --out data/"
+}

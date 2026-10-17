@@ -29,12 +29,21 @@ The Sun is excluded. Proper motion is not applied: positions are at the source's
 
 ## Rebuild
 
+The source is HYG v4.4, pinned by commit and sha256 in `scripts/build_catalog.py` (and recorded in `data/manifest.json`). It is not committed; download it into `source/` (13.6 MB):
+
 ```sh
-python3 scripts/build_catalog.py --source <hyg csv.gz> --out data/
+mkdir -p source
+curl --fail --location --max-filesize 20000000 -o source/hyg_v44.csv.gz \
+  https://codeberg.org/astronexus/hyg/media/commit/53e3df311869e813ace5f1ad2ec4ce909f13256c/data/hyg/CURRENT/hyg_v44.csv.gz
+python3 scripts/build_catalog.py --source source/hyg_v44.csv.gz --out data/
 python3 -m unittest discover scripts
 ```
 
-The build is deterministic: the same source file gives byte-identical outputs, and `data/manifest.json` records the source's sha256.
+Python 3.11 or later, standard library only. The build refuses a source whose sha256 differs from the pin; a new HYG release is a reviewed change to the pin.
+
+**The cut:** every star except the Sun is sorted by magnitude (then by HYG id). A file takes the brightest N stars (6,000 for full, 1,000 for balanced), then every further star exactly as bright as the Nth, so it holds all stars at or brighter than its magnitude limit. From v4.4, that's 6,014 stars to magnitude 6.16 (full) and 1,002 to 4.58 (balanced). The manifest records each file's target, count, limit, size and sha256. `bv` is `NaN` for 27 stars in the full file and 4 in the balanced one.
+
+The build is deterministic: the same source file gives byte-identical outputs, including the manifest, which holds no timestamps or paths.
 
 ## License
 
