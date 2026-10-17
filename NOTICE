@@ -1,0 +1,16 @@
+star-catalog data notice
+
+The files in data/ are derived from the HYG database by David Nash (astronexus),
+https://codeberg.org/astronexus/hyg, licensed under the Creative Commons
+Attribution-ShareAlike 4.0 International License
+(https://creativecommons.org/licenses/by-sa/4.0/).
+
+Changes made to the source:
+- kept only stars at or brighter than the magnitude limit recorded in data/manifest.json, and removed the Sun;
+- converted right ascension and declination to a J2000 unit vector;
+- kept only apparent magnitude and the B-V color index from the remaining fields;
+- stored the result as little-endian float32 records, sorted brightest first.
+
+The derived data in data/ is licensed under the same CC BY-SA 4.0 license
+(see LICENSE-DATA). The scripts in scripts/ are licensed under the MIT
+License (see LICENSE).

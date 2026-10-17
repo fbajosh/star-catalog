@@ -1,0 +1,7 @@
+# source downloads stay out of the repo (the manifest records their sha256)
+source/
+*.csv
+*.csv.gz
+__pycache__/
+*.pyc
+.DS_Store
